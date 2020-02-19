@@ -1,4 +1,9 @@
-.title {
+body {
+    background-color: #1c273a;
+    color: white;
+    /* #29ffff */
+}
+.title, .loading {
     text-align: center;
     font-size: 6vmin;
 }
