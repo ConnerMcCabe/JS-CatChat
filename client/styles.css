@@ -2,6 +2,8 @@
     text-align: center;
     font-size: 6vmin;
 }
-form {
+.messageForm {
     text-align: center;
+    width: 50%;
+    margin: 0 auto;
 }
