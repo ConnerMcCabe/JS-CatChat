@@ -1,5 +1,6 @@
 const form = document.querySelector('form');
 const loadingElement = document.querySelector('.loading');
+const API_URL = 'http://localhost:3000/message';
 
 loadingElement.style.display = "none";
 
@@ -13,5 +14,15 @@ form.addEventListener('submit', (event) =>{
         name,
         content
     };
+    form.style.display = 'none';
+    loadingElement.style.display = '';
+
+    fetch(API_URL, {
+        method: 'POST',
+        body: JSON.stringify(message),
+        headers: {
+            'content-type': 'application/json'
+        }
+    })
     console.log(message)
 })
