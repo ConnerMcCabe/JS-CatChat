@@ -1,7 +1,11 @@
 const express = require('express');
 const cors = require('cors');
+const monk = require('monk');
 
 const app = express();
+
+const db = monk('localhost/chatbox')
+const message = db.get('message')
 
 app.use(cors());
 app.use(express.json());
@@ -19,7 +23,15 @@ function isValid(message) {
 
 app.post('/message', (req, res) =>{
     if (isValid(req.body)) {
-        //coming soon
+        const message = {
+            name: req.body.name.toString(),
+            content: req.body.content.toString()
+        };
+        message
+            .insert(message)
+            .then(createdMessage => {
+                res.json(createdMessage)
+            })
     } else {
         res.status(422);
         res.json({
