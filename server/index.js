@@ -5,7 +5,7 @@ const monk = require('monk');
 const app = express();
 
 const db = monk('localhost/chatbox')
-const message = db.get('message')
+const messages = db.get('messages')
 
 app.use(cors());
 app.use(express.json());
@@ -16,11 +16,11 @@ app.get('/', (req, res) =>{
     })
 });
 
-app.get('/message', (req, res) => {
-    message
+app.get('/messages', (req, res) => {
+    messages
         .find()
-        .then(message => {
-            res.json(message);
+        .then(messages => {
+            res.json(messages);
         })
 })
 
@@ -29,14 +29,14 @@ function isValid(message) {
         message.content && message.content.toString().trim() !== "";
 }
 
-app.post('/message', (req, res) =>{
+app.post('/messages', (req, res) =>{
     if (isValid(req.body)) {
         const message = {
             name: req.body.name.toString(),
             content: req.body.content.toString(),
             created: new Date()
         };
-        message
+        messages
             .insert(message)
             .then(createdMessage => {
                 res.json(createdMessage)

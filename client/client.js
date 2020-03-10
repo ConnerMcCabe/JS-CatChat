@@ -1,8 +1,10 @@
 const form = document.querySelector('form');
 const loadingElement = document.querySelector('.loading');
-const API_URL = 'http://localhost:3000/message';
+const API_URL = 'http://localhost:3000/messages';
 
-loadingElement.style.display = "none";
+loadingElement.style.display = ""; //none
+
+listAllMessages();
 
 form.addEventListener('submit', (event) =>{
     event.preventDefault();
@@ -32,3 +34,12 @@ form.addEventListener('submit', (event) =>{
     })
     
 })
+
+function listAllMessages() {
+    fetch(API_URL)
+        .then(response => response.json())
+        .then(messages => {
+            console.log(messages)
+            messages.forEach(message)
+        });
+}
