@@ -9,7 +9,7 @@ using Skeleton CSS
 
 ### Next items- 
 * add documentation in the future
-* hook up mongo backend
+* hook up mongo server
 * deploy
 
 ### Icebox- 
