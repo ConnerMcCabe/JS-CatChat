@@ -1,9 +1,18 @@
-This is just a basic readme for a soon to be message board clone
+# Message Board
+
+### built with- 
+* JS
+* Mongo
+* Express
 
 using Skeleton CSS
 
-fixed issue 
+### Next items- 
+* add documentation in the future
+* hook up mongo backend
+* deploy
 
-idea for the future- display message form beside the content section 
-    so it has more of a scrolling feel, maybe a page break that puts it back
-    on top for tiny screens
+### Icebox- 
+* display message form beside the content section to better use a large screen
+* page break for smaller screens with form up top
+    
