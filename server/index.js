@@ -12,9 +12,17 @@ app.use(express.json());
 
 app.get('/', (req, res) =>{
     res.json({
-        message: 'heard numba 2'
+        message: 'sanity check 2'
     })
 });
+
+app.get('/message', (req, res) => {
+    message
+        .find()
+        .then(message => {
+            res.json(message);
+        })
+})
 
 function isValid(message) {
     return message.name && message.name.toString().trim() !== "" && 
@@ -25,7 +33,8 @@ app.post('/message', (req, res) =>{
     if (isValid(req.body)) {
         const message = {
             name: req.body.name.toString(),
-            content: req.body.content.toString()
+            content: req.body.content.toString(),
+            created: new Date()
         };
         message
             .insert(message)
@@ -35,7 +44,7 @@ app.post('/message', (req, res) =>{
     } else {
         res.status(422);
         res.json({
-            message: 'sanity check 3'
+            message: 'Hey, type some stuff or this thing no message'
         })
     }
 })

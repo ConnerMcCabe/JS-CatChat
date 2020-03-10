@@ -23,6 +23,12 @@ form.addEventListener('submit', (event) =>{
         headers: {
             'content-type': 'application/json'
         }
+    }).then(response => response.json())
+    .then(createdMessage => {
+        console.log(createdMessage)
+        form.reset();
+        form.style.display = '';
+        loadingElement.style.display = 'none';
     })
-    console.log(message)
+    
 })
