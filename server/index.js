@@ -1,14 +1,18 @@
 const express = require('express');
 const cors = require('cors');
 const monk = require('monk');
+const Filter = require('bad-words');
+const rateLimit = require("express-rate-limit");
 
 const app = express();
 
 const db = monk('localhost/chatbox')
 const messages = db.get('messages')
+const filter = new Filter()
 
 app.use(cors());
 app.use(express.json());
+
 
 app.get('/', (req, res) =>{
     res.json({
@@ -29,11 +33,16 @@ function isValid(message) {
         message.content && message.content.toString().trim() !== "";
 }
 
+app.use(rateLimit({
+    windowMs: 3 * 1000,
+    max: 1
+}));
+
 app.post('/messages', (req, res) =>{
     if (isValid(req.body)) {
         const message = {
-            name: req.body.name.toString(),
-            content: req.body.content.toString(),
+            name: filter.clean(req.body.name.toString()),
+            content: filter.clean(req.body.content.toString()),
             created: new Date()
         };
         messages
